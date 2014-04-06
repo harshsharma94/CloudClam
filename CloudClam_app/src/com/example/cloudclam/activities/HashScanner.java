@@ -18,6 +18,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,14 +28,20 @@ import android.widget.TextView;
 import com.example.cloudclam.R;
 import com.example.cloudclam.helpers.DBAssistant;
 import com.example.cloudclam.helpers.JSONParser;
+import com.example.cloudclam.ssdeep.SpamSumSignature;
+import com.example.cloudclam.ssdeep.Ssdeep;
 
 public class HashScanner extends Activity{
 
 	ProgressBar scanProgress;
-	TextView scanInd,fileInd,malwareInd;
+	TextView filesNo,fileInd,malwareInd,insecFiles,scanEngineView,totalFilesNo;
 	String[][] apkInfo;
 	DBAssistant myDB;
 	ArrayList<String> malwares;
+	private static String scanType;
+	Ssdeep hashGen;
+	String ssDeep;
+	SpamSumSignature mySig;
 	
 	//Web Request Vars
 	JSONParser jParser = new JSONParser();
@@ -58,9 +65,15 @@ public class HashScanner extends Activity{
 	}
 	
 	private void setupVariables(){
+		Bundle scan = getIntent().getBundleExtra("scanHolder");
+		scanType = scan.getString("scanType");
+		filesNo = (TextView)findViewById(R.id.fScan);
 		scanProgress = (ProgressBar)findViewById(R.id.PBar);
 		fileInd = (TextView)findViewById(R.id.tvFileInd);
 		malwareInd = (TextView)findViewById(R.id.TVSecurity);
+        insecFiles = (TextView)findViewById(R.id.TVInsecureFiles);
+        scanEngineView = (TextView)findViewById(R.id.TVScanType);
+        totalFilesNo = (TextView)findViewById(R.id.TVtotalFiles);
 		malwares = new ArrayList<String>();
 		myDB = new DBAssistant(this);
 	}
@@ -93,7 +106,17 @@ public class HashScanner extends Activity{
 			pDialog.dismiss();
 			scanProgress.setMax(apkInfo.length);
 			scanProgress.setIndeterminate(false);
-			new SearchMD5Hash().execute();
+            Drawable pBarDrawable = getResources().getDrawable(R.drawable.custom_progressbar);
+            scanProgress.setProgressDrawable(pBarDrawable);
+            totalFilesNo.setText(totalFilesNo.getText() + "" + apkInfo.length);
+            if(scanType.equals("md5")){
+                scanEngineView.setText(scanEngineView.getText() + "MD5 Scanner");
+				new SearchMD5Hash().execute();
+			}
+			else if(scanType.equals("ssdeep")){
+                scanEngineView.setText(scanEngineView.getText() + "SSDeep Scanner");
+				new SearchSSDeepHash().execute();
+			}
 		}
 		
 		private String[][] listAllApkSources(){
@@ -165,9 +188,9 @@ public class HashScanner extends Activity{
 			super.onPostExecute(result);
 			fileInd.setText("Complete");
 			if(malwares.size() > 0){
-				malwareInd.setText("Malware in the following Apps\n");
+				malwareInd.setText("Malware Detected :-\n");
 				for(int i=0;i < malwares.size();i++){
-					malwareInd.setText(malwareInd.getText() + malwares.get(i) + "\n");
+					insecFiles.setText(insecFiles.getText() + malwares.get(i) + "\n");
 				}
 				malwareInd.setTextColor(getResources().getColor(R.color.Red));
 			}
@@ -179,10 +202,10 @@ public class HashScanner extends Activity{
 			super.onProgressUpdate(values);
 			scanProgress.setProgress(values[0]);
 			//Update UI
+            filesNo.setText("Files Scanned : " + values[0]);
 			fileInd.setText(apkInfo[values[0]][1]);
 		}
-		
-		
+				
 		private void doScan(){
 			//Initialization
 			try {
@@ -238,15 +261,69 @@ public class HashScanner extends Activity{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				publishProgress(i);
-				
+				publishProgress(i);	
 			}
 			
 		}
 		
 		
 	}
-	
+
+	class SearchSSDeepHash extends AsyncTask<String,Integer,String>{
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+		}
+
+		@Override
+		protected String doInBackground(String... params) {
+			// TODO Auto-generated method stub
+			try {
+				doScan();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+            fileInd.setText("Complete");
+            if(malwares.size() > 0){
+                malwareInd.setText("Malware Detected :-\n");
+                for(int i=0;i < malwares.size();i++){
+                    insecFiles.setText(insecFiles.getText() + malwares.get(i) + "\n");
+                }
+                malwareInd.setTextColor(getResources().getColor(R.color.Red));
+            }
+		}
+
+		protected void onProgressUpdate(Integer ... values) {
+			super.onProgressUpdate(values);
+			scanProgress.setProgress(values[0]);
+			//Update UI
+            filesNo.setText("Files Scanned : " + values[0]);
+			fileInd.setText(apkInfo[values[0]][1]);
+		}
+				
+		private void doScan() throws FileNotFoundException, IOException{
+			hashGen = new Ssdeep();
+			for(int i=0;i<apkInfo.length;i++){
+				//Calculate SSDeep
+				ssDeep = hashGen.fuzzy_hash_file(new File(apkInfo[i][0]));
+				mySig = new SpamSumSignature(ssDeep);
+				Log.d("SSDEEP",ssDeep);
+                //filesNo.setText("Files Scanned : " + i);
+				publishProgress(i);
+			}
+		}
+	}
 	
 }

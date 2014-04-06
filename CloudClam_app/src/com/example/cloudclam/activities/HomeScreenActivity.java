@@ -12,7 +12,7 @@ import com.example.cloudclam.helpers.DBAssistant;
 
 public class HomeScreenActivity extends Activity implements OnClickListener{
 
-	Button startScan,offDB,onDB,apkInfo,exit;
+	Button startScan,apkInfo,exit,startDeepScan;
 	DBAssistant dbAssist;
 	
 	
@@ -41,31 +41,41 @@ public class HomeScreenActivity extends Activity implements OnClickListener{
 		case R.id.Binfo:
 			startActivity(new Intent(HomeScreenActivity.this,APKInfo.class));
 			break;
+        /*
 		case R.id.Bofflinedb:
 			startActivity(new Intent(HomeScreenActivity.this,OfflineDBView.class));
 			break;
 		case R.id.Bonlinedb:
 			startActivity(new Intent(HomeScreenActivity.this,OnlineDBView.class));
 			break;
+		*/
 		case R.id.BScan:
-			startActivity(new Intent(HomeScreenActivity.this,HashScanner.class));
+			Bundle scanHolder = new Bundle();
+			scanHolder.putString("scanType", "md5");
+			Intent scanActivity = new Intent(HomeScreenActivity.this,HashScanner.class);
+			scanActivity.putExtra("scanHolder",scanHolder);		
+			startActivity(scanActivity);
+			break;
+		case R.id.BDScan:
+			Bundle scanHolder2 = new Bundle();
+			scanHolder2.putString("scanType", "ssdeep");
+			Intent scanActivity2 = new Intent(HomeScreenActivity.this,HashScanner.class);
+			scanActivity2.putExtra("scanHolder",scanHolder2);		
+			startActivity(scanActivity2);
 			break;
 		}
 		
 	}
-	
-	
+
 	private void setupButtons(){
 		startScan = (Button)findViewById(R.id.BScan);
-		offDB = (Button)findViewById(R.id.Bofflinedb);
-		onDB = (Button)findViewById(R.id.Bonlinedb);
+		startDeepScan = (Button)findViewById(R.id.BDScan);
 		exit = (Button)findViewById(R.id.Bexit);
 		apkInfo = (Button)findViewById(R.id.Binfo);
 		startScan.setOnClickListener(this);
-		offDB.setOnClickListener(this);
-		onDB.setOnClickListener(this);
 		apkInfo.setOnClickListener(this);
 		exit.setOnClickListener(this);
+		startDeepScan.setOnClickListener(this);
 	}
 
 	private void setupOfflineDB(){

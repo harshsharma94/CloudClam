@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/Orange"
+     >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="ClamScan Engine"
+        android:textStyle="bold"
+        android:textSize="30dp" 
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="@color/OrangeRed"
+        />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="vertical"
+    >
+    <TextView
+        android:paddingTop="20dp"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Number of Apks : "
+        android:id="@+id/TVtotalFiles"
+        />
+    <TextView
+        android:paddingTop="20dp"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan Engine : "
+        android:id="@+id/TVScanType"
+        />
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/DarkOrange"
+    >
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <TextView
+        android:id="@+id/tvScanInd"
+         android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scanning..."
+        android:textStyle="italic"
+        android:textColor="@color/WhiteSmoke"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+        android:id="@+id/tvFileInd"
+         android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="50dp"
+        android:textSize="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textStyle="italic"
+        android:textColor="@color/WhiteSmoke"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+</LinearLayout>
+
+<ProgressBar
+    android:id="@+id/PBar"
+    style="?android:attr/progressBarStyleHorizontal"
+    android:paddingTop="10dp"
+    android:layout_width="240dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center" />
+
+<TextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="Files Scanned : 0"
+       android:id="@+id/fScan"
+    />
+</LinearLayout>
+
+<TextView
+    android:id="@+id/TVSecurity"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="50dp"
+    android:textColor="@color/Green"
+    android:text="Secure"
+    android:textSize="30dp"
+     />
+
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/TVInsecureFiles"
+    android:textSize="20dp"
+    />
+    
+</LinearLayout>
+<!-- From: file:/E:/android/AndroWorker/CloudClam/res/layout/hash_scan.xml -->
