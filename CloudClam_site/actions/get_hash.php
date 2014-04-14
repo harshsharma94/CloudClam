@@ -17,7 +17,7 @@ if(isset($_GET["hash_short"]) && isset($_GET["hash_long"])){
     $hash_long_act = $_GET["hash_long"];
     
     //get long hash options from short hash
-    $query = mysql_query("SELECT * FROM hashtab WHERE hash_short = $hash_short ORDER BY pid DESC");
+    $query = mysql_query("SELECT * FROM hashtab WHERE hash_short = '$hash_short' ORDER BY pid DESC");
     
     if(!empty($query)){
         //check for empty result

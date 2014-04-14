@@ -50,9 +50,10 @@ public class DBAssistant {
 		Cursor c = myDB.query(DB_TABLE, null, HASH_SHORT + "=?", new String[]{hash_short}, null,null,null);
 		if(c.getCount() < 1){
 			c.close();
-			Log.d("DB_UPDATER","MD5 not found");
+			Log.d("DB_UPDATER","HASH NOT FOUND");
 			return false;
 		}else{
+			c.close();
 			//Now search that hash online
 			return true;
 		}
