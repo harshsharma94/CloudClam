@@ -9,42 +9,45 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".HomeScreenActivity"
-    android:background="@color/Black"
-     >
+    android:background="@drawable/blur"
+    android:weightSum="100">
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="CloudClam AV"
-        android:textStyle="italic|bold"
-        android:textSize="35dp"
-        android:textColor="@color/Chocolate"
-        android:paddingTop="20dp"
+        android:background="@color/Green"
         android:paddingBottom="20dp"
         android:paddingLeft="50dp"
+        android:paddingTop="20dp"
+        android:text="CloudClam AV"
+        android:textColor="@color/WhiteSmoke"
+        android:textSize="35dp"
+        android:textStyle="italic|bold"
         android:typeface="serif"
-         />
+        android:layout_weight="20" />
 
 <LinearLayout
-    android:layout_width="wrap_content"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:gravity="center"
     android:paddingTop="10dp"
     android:paddingBottom="20dp"
-     >
+    android:layout_weight="20" >
 
     <Button
         android:id="@+id/BScan"
-
+        
         android:text="Quick Scan"
         android:textColor="#000000"
         android:textSize="25sp"
 
-        android:layout_width="150dp"
-        android:layout_height="60dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/buttonshape"
+        android:drawableLeft="@drawable/quickscan"
         android:shadowColor="#A8A49C"
         android:shadowDx="0"
         android:shadowDy="0"
@@ -53,36 +56,34 @@
 </LinearLayout>
 
 <LinearLayout
-    android:layout_width="wrap_content"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
+    android:gravity="center"
     android:paddingBottom="20dp"
-     >
+    android:layout_weight="20" >
 
     <Button
         android:id="@+id/BDScan"
-
-        android:text="Deep Scan"
-        android:textColor="#000000"
-        android:textSize="25sp"
-
-        android:layout_width="150dp"
-        android:layout_height="60dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/buttonshape"
+        android:drawableLeft="@drawable/deepscan"
         android:shadowColor="#A8A49C"
         android:shadowDx="0"
         android:shadowDy="0"
         android:shadowRadius="5"
-        />
-
+        android:text="Deep Scan"
+        android:textColor="#000000"
+        android:textSize="25sp" />
 </LinearLayout>
 
 <LinearLayout
-    android:layout_width="wrap_content"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:gravity="center"
     android:paddingBottom="20dp"
-     >
+    android:layout_weight="20" >
 
     <Button
         android:id="@+id/Binfo"
@@ -91,9 +92,10 @@
         android:textColor="#000000"
         android:textSize="25sp"
 
-        android:layout_width="150dp"
-        android:layout_height="60dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/buttonshape"
+        android:drawableLeft="@drawable/android"
         android:shadowColor="#A8A49C"
         android:shadowDx="0"
         android:shadowDy="0"
@@ -106,8 +108,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:gravity="center"
     android:paddingBottom="20dp"
-     >
+    android:layout_weight="20" >
 
     <Button
         android:id="@+id/Bexit"
@@ -116,8 +119,8 @@
         android:textColor="#000000"
         android:textSize="25sp"
 
-        android:layout_width="150dp"
-        android:layout_height="60dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/buttonshape"
         android:shadowColor="#A8A49C"
         android:shadowDx="0"
