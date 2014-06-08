@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/Orange"
+    android:background="@drawable/blurred"
      >
 
     <TextView
@@ -12,13 +12,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="ClamScan Engine"
+        android:textColor="@color/DarkSeaGreen"
         android:textStyle="bold"
         android:textSize="30dp" 
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:background="@color/OrangeRed"
         />
 <LinearLayout
     android:layout_width="match_parent"
@@ -31,6 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Total Number of Apks : "
+        android:textColor="@color/DarkSeaGreen"
         android:id="@+id/TVtotalFiles"
         />
     <TextView
@@ -38,6 +39,7 @@
         android:textSize="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/DarkSeaGreen"
         android:text="Scan Engine : "
         android:id="@+id/TVScanType"
         />
@@ -47,7 +49,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/DarkOrange"
     >
 <LinearLayout 
     android:layout_width="match_parent"
@@ -106,11 +107,20 @@
     android:textSize="30dp"
      />
 
+<ScrollView
+    android:id="@+id/SCROLLER_ID"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical"
+    android:fillViewport="true">
+
 <TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/TVInsecureFiles"
     android:textSize="20dp"
+    android:layout_weight="1.0"
     />
+</ScrollView>
     
 </LinearLayout>

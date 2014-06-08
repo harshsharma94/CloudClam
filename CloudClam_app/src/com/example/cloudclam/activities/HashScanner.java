@@ -21,6 +21,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -49,6 +50,12 @@ public class HashScanner extends Activity
 	JSONParser jParser = new JSONParser();
 	private static String url_checkhash = "http://172.16.6.88/CloudClam/actions/get_hash.php";
 	private static String url_ssdeephash = "http://172.16.6.88/CloudClam/actions/get_ssdeephash.php";
+	
+	//private static String url_checkhash = "http://10.0.2.2/CloudClam/actions/get_hash.php";
+	//private static String url_ssdeephash = "http://10.0.2.2/CloudClam/actions/get_ssdeephash.php";
+	
+	//private static String url_checkhash = "http://192.168.221.1/CloudClam/actions/get_hash.php";
+	//private static String url_ssdeephash = "http://192.168.221.1/CloudClam/actions/get_ssdeephash.php";
 	
 	// JSON NODE NAMES
 	private static final String TAG_SUCCESS = "success";
@@ -113,7 +120,7 @@ public class HashScanner extends Activity
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pDialog.dismiss();
-			scanProgress.setMax(apkInfo.length);
+			scanProgress.setMax(apkInfo.length-1);
 			scanProgress.setIndeterminate(false);
 			Drawable pBarDrawable = getResources().getDrawable(
 					R.drawable.custom_progressbar);
@@ -224,6 +231,7 @@ public class HashScanner extends Activity
 				}
 				malwareInd.setTextColor(getResources().getColor(R.color.Red));
 			}
+			//insecFiles.setMovementMethod(new ScrollingMovementMethod());
 		}
 
 		@Override
@@ -233,7 +241,8 @@ public class HashScanner extends Activity
 			super.onProgressUpdate(values);
 			scanProgress.setProgress(values[0]);
 			// Update UI
-			filesNo.setText("Files Scanned : " + values[0]);
+			int numFiles = values[0] + 1;
+			filesNo.setText("Files Scanned : " + Integer.toString(numFiles));
 			fileInd.setText(apkInfo[values[0]][1]);
 		}
 
@@ -366,7 +375,8 @@ public class HashScanner extends Activity
 			super.onProgressUpdate(values);
 			scanProgress.setProgress(values[0]);
 			// Update UI
-			filesNo.setText("Files Scanned : " + values[0]);
+			int numFiles = values[0] + 1;
+			filesNo.setText("Files Scanned : " + Integer.toString(numFiles));
 			fileInd.setText(apkInfo[values[0]][1]);
 		}
 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="HardcodedText">
+        <ignore path="res/layout/hash_scan.xml" />
+    </issue>
+    <issue id="SpUsage">
+        <ignore path="res/layout/hash_scan.xml" />
+    </issue>
+</lint>
